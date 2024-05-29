@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  react-app:
+    build:
+      context: ./StudentManageFrontend/studentclient
+    image: 8084577018/studentmanage-spring-boot-app:latest
+    ports:
+      - "3000:3000"
+    depends_on:
+      - spring-boot-app
+
+  spring-boot-app:
+    build:
+      context: ./StudentManageBackend/studentserver
+    image: 8084577018/studentmanage-react-app:latest
+    ports:
+      - "9192:9192"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://studentdb:3306/studentdb
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: Cb@64565120
+    depends_on:
+      - studentdb
+
+  studentdb:
+    image: mysql:8.0 # Ensure you are using the MySQL image
+    environment:
+      MYSQL_ROOT_PASSWORD: Cb@64565120
+      MYSQL_DATABASE: studentdb
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
