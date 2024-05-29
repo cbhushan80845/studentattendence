@@ -43,7 +43,7 @@ jobs:
           source: "./docker-compose.yml"
           target: "/home/ubuntu/docker-compose.yml"
 
-      - name: Docker pull and run on host
+      - name: Docker pull and run on Host
         uses: appleboy/ssh-action@master
         with:
           host: ${{ env.SSH_HOST }}
