@@ -39,20 +39,18 @@ jobs:
       - name: Build React App Docker Image
         run: |
           cd StudentManageFrontend/studentclient
-          docker build -t studentmanage-react-app:latest .
+          docker build -t 8084577018/studentmanage-react-app:latest .
 
       - name: Build Spring Boot App Docker Image
         run: |
           cd StudentManageBackend/studentserver
           mvn clean package -DskipTests
-          docker build -t studentmanage-spring-boot-app:latest .
+          docker build -t 8084577018/studentmanage-spring-boot-app:latest .
 
       - name: Push Docker Images to Docker Hub
         run: |
-          docker tag studentmanage-react-app:latest ${{ secrets.DOCKER_USERNAME }}/studentmanage-react-app:latest
-          docker tag studentmanage-spring-boot-app:latest ${{ secrets.DOCKER_USERNAME }}/studentmanage-spring-boot-app:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/studentmanage-react-app:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/studentmanage-spring-boot-app:latest
+          docker push 8084577018/studentmanage-react-app:latest
+          docker push 8084577018/studentmanage-spring-boot-app:latest
 
       - name: Copy docker-compose.yml via SCP
         uses: appleboy/scp-action@v0.1.7
